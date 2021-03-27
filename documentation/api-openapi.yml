@@ -1,0 +1,118 @@
+openapi: "3.0.1"
+info:
+  title: "Demeter"
+  version: v0
+servers:
+  - url: 'http://localhost:8021'
+    description: Generated server url
+paths:
+  '/zipcodes/{zipcode}/stableIncomeCategories':
+    post:
+      tags:
+        - costOfLivingController
+      operationId: generateCostOfLiving
+      parameters:
+        - name: zipcode
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Cost of living saved
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CostOfLivingResponse'
+    get:
+      tags:
+        - costOfLivingController
+      operationId: getCostOfLiving
+      parameters:
+        - name: zipcode
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cost of living retrieved
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CostOfLivingResponse'
+    put:
+      tags:
+        - costOfLivingController
+      operationId: updateCostOfLiving
+      parameters:
+        - name: zipcode
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cost of living updated
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CostOfLivingResponse'
+components:
+  schemas:
+    CostOfLiving:
+      type: object
+      properties:
+        carInsurance:
+          $ref: '#/components/schemas/Stats'
+        carPayment:
+          $ref: '#/components/schemas/Stats'
+        education:
+          $ref: '#/components/schemas/Stats'
+        gas:
+          $ref: '#/components/schemas/Stats'
+        groceries:
+          $ref: '#/components/schemas/Stats'
+        hairCut:
+          $ref: '#/components/schemas/Stats'
+        healthInsurance:
+          $ref: '#/components/schemas/Stats'
+        phone:
+          $ref: '#/components/schemas/Stats'
+        rent:
+          $ref: '#/components/schemas/Stats'
+        restaurants:
+          $ref: '#/components/schemas/Stats'
+        shopping:
+          $ref: '#/components/schemas/Stats'
+        studentLoans:
+          $ref: '#/components/schemas/Stats'
+        utilities:
+          $ref: '#/components/schemas/Stats'
+        zipcode:
+          type: number
+          example: 12345
+
+    CostOfLivingResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        data:
+          $ref: '#/components/schemas/CostOfLiving'
+    Stats:
+      type: object
+      properties:
+        min:
+          type: number
+          example: 100.71
+        max:
+          type: number
+          example: 500.23
+        average:
+          type: number
+          example: 200.20
+        mean:
+          type: number
+          example: 201.21
